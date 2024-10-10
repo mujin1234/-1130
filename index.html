@@ -1,0 +1,180 @@
+<!DOCTYPE html><html><head><base href="https://phishingsimulation.example.com/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>账户验证 - 安徽工商职业学院</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .header {
+    background-color: #0072C6;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+  }
+  .content {
+    padding: 20px 0;
+  }
+  .button {
+    display: inline-block;
+    background-color: #0072C6;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .button:hover {
+    background-color: #005ea2;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #666;
+  }
+  #warning-page {
+    display: none;
+    text-align: center;
+  }
+  #warning-page h2 {
+    color: #d9534f;
+  }
+  #login-page {
+    display: none;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+  <div class="container" id="phishing-email">
+    <div class="header">
+      <h1>重要通知：您的账户需要验证</h1>
+    </div>
+    <div class="content">
+      <p>亲爱的安工商学子：</p>
+      <p>我们检测到您的账户存在异常活动。为了保护您的账户安全，请立即点击下方按钮验证您的身份信息。</p>
+      <p>如果您不尽快完成验证，您的账户可能会被临时冻结。</p>
+      <p style="text-align: center;">
+        <a href="#" class="button" id="verify-button">立即验证账户</a>
+      </p>
+      <p>如果您无法点击上面的按钮，请复制以下链接并粘贴到您的浏览器地址栏：</p>
+      <p><a href="#" id="verify-link">https://secure-verify.example.com/account-verification</a></p>
+      <p>感谢您的配合。</p>
+      <p>安徽工商职业学院</p>
+    </div>
+    <div class="footer">
+      <p>2023-2024</p>
+    </div>
+  </div>
+
+  <div class="container" id="login-page">
+    <div class="header">
+      <h1>账户验证</h1>
+    </div>
+    <div class="content">
+      <form id="login-form">
+        <div class="form-group">
+          <label for="student-id">校园卡账号：</label>
+          <input type="text" id="student-id" name="student-id" required="">
+        </div>
+        <div class="form-group">
+          <label for="password">密码：</label>
+          <input type="password" id="password" name="password" required="">
+        </div>
+        <button type="submit" class="button">登录</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="container" id="warning-page">
+    <h2>警告：您已被骗！</h2>
+    <p>这是一个钓鱼网站模拟测试。在真实情况下，输入您的个人信息可能会导致信息被盗。</p>
+    <p>请记住以下安全提示：</p>
+    <ul>
+      <li>不要点击来源不明的邮件中的链接</li>
+      <li>仔细检查网站的URL，确保是官方网站</li>
+      <li>不要在弹出窗口或可疑网页上输入个人信息</li>
+      <li>如有疑问，直接联系相关机构确认</li>
+    </ul>
+    <p>保持警惕，保护您的网络安全！</p>
+    <button class="button" id="back-button">我知道啦！</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const verifyButton = document.getElementById('verify-button');
+      const verifyLink = document.getElementById('verify-link');
+      const backButton = document.getElementById('back-button');
+      const phishingEmail = document.getElementById('phishing-email');
+      const loginPage = document.getElementById('login-page');
+      const warningPage = document.getElementById('warning-page');
+      const loginForm = document.getElementById('login-form');
+
+      function showLoginPage() {
+        phishingEmail.style.display = 'none';
+        loginPage.style.display = 'block';
+        warningPage.style.display = 'none';
+      }
+
+      function showWarning() {
+        phishingEmail.style.display = 'none';
+        loginPage.style.display = 'none';
+        warningPage.style.display = 'block';
+      }
+
+      function showPhishingEmail() {
+        phishingEmail.style.display = 'block';
+        loginPage.style.display = 'none';
+        warningPage.style.display = 'none';
+      }
+
+      verifyButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginPage();
+      });
+
+      verifyLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginPage();
+      });
+
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showWarning();
+      });
+
+      backButton.addEventListener('click', function() {
+        showPhishingEmail();
+      });
+    });
+  </script>
+</body></html>
